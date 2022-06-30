@@ -4,14 +4,13 @@ package com.demo.capstoneproject.model;
 import com.sun.istack.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
-@Getter
-@Setter
-@ToString
+@Getter @Setter @Slf4j @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -23,7 +22,7 @@ public class Book {
 
     //Creating primary key
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     ////////////////////////WARNING WARNING WARNING//////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
@@ -44,14 +43,11 @@ public class Book {
     @Column(name = "authors")
     String authors;
 
-
     @Column(name = "publisher")
     String publisher;
 
-
     @Column(name = "isbn")
     String isbn;
-
 
     @Column(name = "status")
     String status;
