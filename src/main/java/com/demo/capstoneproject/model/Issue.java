@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Objects;
 
 @Getter @Setter @ToString @Slf4j
 @NoArgsConstructor
@@ -45,5 +46,18 @@ public class Issue {
     //
     //
     //SO AS VALIDATION
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Issue issue = (Issue) o;
+        return id.equals(issue.id) && Objects.equals(issueDate, issue.issueDate) && notes.equals(issue.notes) && expectedReturnDate.equals(issue.expectedReturnDate) && returned.equals(issue.returned);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, issueDate, notes, expectedReturnDate, returned);
+    }
+
 
 }
