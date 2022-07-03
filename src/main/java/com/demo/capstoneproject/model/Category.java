@@ -1,15 +1,17 @@
 package com.demo.capstoneproject.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
-
+import javax.persistence.CascadeType;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Getter @Setter @ToString @Slf4j
@@ -53,8 +55,10 @@ public class Category {
     @Column(name = "create_date")
     Date createDate;
 
-/////////////////////////Table relationship here////////////////
-
+    //OneToMany relationship between category and book tables
+    @JsonIgnore
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Book> books;
 
     @Override
     public boolean equals(Object o) {

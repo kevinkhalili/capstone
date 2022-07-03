@@ -27,8 +27,6 @@ public class Book {
     ////////////////////////WARNING WARNING WARNING//////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
     //************THE ANNOTATION FOR THESE FIELDS NEED TO BE MODIFIED FOR VALIDATION LATER
-    //////////////////////////////////////////////////////////////////////////////////////
-    //****************SO AS TABLE RELATIONSHIP***************************************
 
     //Creating other fields of book table such as title, tag, authors, publisher, isbn, status and create_date
     @NotNull
@@ -54,6 +52,12 @@ public class Book {
 
     @Column(name = "create_date")
     Date createDate;
+
+    //ManyToOne relationship between book and category tables
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
 
     //overriding equals method
     @Override
