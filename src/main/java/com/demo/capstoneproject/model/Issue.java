@@ -2,13 +2,16 @@ package com.demo.capstoneproject.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Getter @Setter @ToString @Slf4j
@@ -41,11 +44,19 @@ public class Issue {
     @Column(name="returned")
     Integer returned;
 
-    ///////////////////////////////////////Warning/////////////////////////////////
-    // TABLE RELATIONSHIP GOES HERE IT IS MISSING FOR NOW/////////////////////////
-    //
-    //
-    //SO AS VALIDATION
+
+    //SO AS VALIDATION///////////////////////////////////////////
+
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
+    private List<IssuedBook> issuedBooks;
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

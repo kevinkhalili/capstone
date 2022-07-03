@@ -1,11 +1,13 @@
 package com.demo.capstoneproject.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -24,7 +26,19 @@ public class IssuedBook {
     @Column(name="id")
     long id;
 
-    //***********************RELATIONSHIP GOES HERE*****************
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_id")
+    @NotNull
+    private Book book;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "issue_id")
+    @NotNull
+    private Issue issue;
+
+
     /////////////////CHECK FOR VALIDATION IF ANY////////////////////
 
     @Column(name = "returned")

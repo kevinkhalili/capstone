@@ -17,7 +17,7 @@ import java.util.Date;
 @Entity
 @Table(name = "member")
 
-public class member {
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,7 +58,7 @@ public class member {
     @Column(name = "email")
     String email;
 
-    //////////////////////////TABLE RELATIONSHIP GOES HERE IF AND ONLY IF////////////////////
+
     //**************VALIDATION IF IT REQUIRES**********************
 
 
