@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +24,9 @@ import java.util.Objects;
 @Table(name = "issue")
 
 
-public class Issue {
+public class Issue implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +48,7 @@ public class Issue {
     Integer returned;
 
 
-    //SO AS VALIDATION///////////////////////////////////////////
+
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)

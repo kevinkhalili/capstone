@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.CascadeType;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -22,15 +23,12 @@ import java.util.Objects;
 @Entity
 @Table(name = "category")
 
-public class Category {
+public class Category implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     //Declaring data members with annotations
 
-    //*************Warning**************
-    //*************Warning**************
-    /////////////Annotations need to be modified/completed for validation///////////
-    ///classes for validation imported for this entity but must be completed
-    ///////////////////////////////////////////////////////////////////////
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,12 +36,12 @@ public class Category {
     Long id;
 
     @NotNull
-    @NotBlank
+    @NotBlank(message = "*Please enter category name")
     @Column(name = "name")
     String name;
 
     @NotNull
-    @NotBlank
+    @NotBlank(message = "*Please enter category short name")
     @Length(max = 4, message = "*Must not exceed 4 characters.")
     @Column(name = "short_name")
     String shortName;

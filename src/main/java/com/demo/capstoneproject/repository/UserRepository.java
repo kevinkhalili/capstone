@@ -13,7 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     public List<User> findAllByActiveOrderByDisplayNameAsc(Integer active);
 
-    //////////////////check the problem later///////////////////////
 
-//    public User findByUserName(String username);
+    public User findByUsername(String username);
 }

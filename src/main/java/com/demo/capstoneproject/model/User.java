@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -18,7 +19,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "user")
 
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,6 +55,14 @@ public class User {
     @NotNull
     @Column(name = "last_modified_date")
     Date lastModifiedDate;
+
+    public User(@NotNull String displayName, @NotNull String username, @NotNull String password, @NotNull String role) {
+        super();
+        this.displayName = displayName;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
     @Override
     public boolean equals(Object o) {

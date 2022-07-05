@@ -1,12 +1,16 @@
 package com.demo.capstoneproject.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.bridge.IMessage;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -18,26 +22,30 @@ import java.util.Objects;
 @Entity
 @Table(name = "book")
 
-public class Book {
+public class Book implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     //Creating primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     Long id;
-    ////////////////////////WARNING WARNING WARNING//////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////////////
-    //************THE ANNOTATION FOR THESE FIELDS NEED TO BE MODIFIED FOR VALIDATION LATER
+
 
     //Creating other fields of book table such as title, tag, authors, publisher, isbn, status and create_date
     @NotNull
+    @NotBlank(message = "*Please enter book title")
     @Column(name = "title")
     String title;
 
     @NotNull
+    @NotBlank(message = "*Please enter book tag")
     @Column(name = "tag")
     String tag;
 
     @NotNull
+    @NotBlank(message = "*Please enter book authors")
     @Column(name = "authors")
     String authors;
 
@@ -54,6 +62,7 @@ public class Book {
     Date createDate;
 
     //ManyToOne relationship between book and category tables
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

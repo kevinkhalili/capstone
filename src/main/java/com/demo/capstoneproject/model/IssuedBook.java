@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -19,7 +20,9 @@ import java.util.logging.Level;
 @Entity
 @Table(name="issued_book")
 
-public class IssuedBook {
+public class IssuedBook implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,8 +41,6 @@ public class IssuedBook {
     @NotNull
     private Issue issue;
 
-
-    /////////////////CHECK FOR VALIDATION IF ANY////////////////////
 
     @Column(name = "returned")
     Integer returned;
